@@ -1,6 +1,6 @@
 import { User, UserDocument } from "./model";
 
-const createUser = (body: any): any => {
+const createUser = (body: any) => {
   return new Promise(async (rs, rj) => {
     try {
       const user = await User.create(body);
@@ -13,6 +13,20 @@ const createUser = (body: any): any => {
   });
 };
 
+const getUsers = () => {
+  return new Promise(async (rs, rj) => {
+    try {
+      const users = await User.find();
+      if (users) {
+        rs(users);
+      }
+    } catch (error) {
+      rj(error);
+    }
+  });
+};
+
 export default {
   createUser,
+  getUsers,
 };
